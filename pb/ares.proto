@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package ares;
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+
+option go_package = "github.com/eifzed/ares/pb";
+
+
+// ===== USER SERVICE - START =====
+message LoginRequest {
+    string email = 1; 
+    string password = 2; 
+}
+
+message LoginResponse {
+    string token = 1;
+    string valid_until = 2;
+}
+
+message MessageResponse {
+    string message = 1;
+}
+
+message UserRegistrationRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string phone_number = 4;
+    string password = 5;
+    string birth_date = 6;
+}
+
+message Role {
+    int64 id = 1;
+    string name = 2;
+}
+
+service UserService {
+    rpc Logout (google.protobuf.Empty) returns (MessageResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Register (UserRegistrationRequest) returns (LoginResponse);
+}
+
+// ===== USER SERVICE - END =====
+
+// ===== ORDER SERVICE - START =====
+
+message RegisterOrderRequest {
+    string business_id = 2; 
+    repeated OrderProduct order_products = 4;
+    string customer_note = 5;
+}
+
+message OrderProduct {
+    string product_id = 3;
+    uint32 quantity = 4;
+}
+
+
+// filters
+message GetOrdersRequest {
+    string status = 1;
+    string business_id = 2;
+    string start_order_date = 3;
+    string end_order_date = 4;
+    bool sort_date_ascending = 5; // descending by default
+}
+
+message Order {
+    string order_id = 1;
+    string business_name = 2;
+    repeated OrderProduct order_products = 3;
+    string status = 4;
+    string customer_note = 5;
+    string shop_note = 6;
+    uint32 rating = 7;
+    google.protobuf.Timestamp order_time = 8;
+}
+
+message GetOrdersResponse {
+    int64 total = 1;
+    repeated Order orders = 2;
+}
+
+message RegisterBusinessRequest{
+    string name = 1;
+    string address = 2;
+    string phone_number = 3;
+    string description = 4;
+    string photo_URL = 5;
+    repeated ProductRegistration products = 6;
+}
+
+message ProductRegistration {
+    string name = 1;
+    uint32 price_IDR = 2;
+    string description = 3;
+    string photo_URL = 4;
+}
+
+message GenericFilterParams {
+    string keyword = 1;
+    uint32 limit = 2;
+    uint32 page = 3;
+}
+
+message GetBusinessListResponse {
+    uint32 total = 1;
+    repeated BusinessList business_list = 2;
+}
+
+message BusinessList {
+    string id = 1;
+    string name = 2;
+    string address = 3;
+    string photo_URL = 4;
+}
+
+message GetBusinessDetailRequest {
+    string business_id = 1;
+}
+
+message GetBusinessDetailResponse {
+    string id = 1;
+    string name = 2;
+    string address = 3;
+    string phone_number = 4;
+    string description = 5;
+    string photo_URL = 6;
+    repeated ProductDetail products = 7;
+}
+
+message ProductDetail {
+    string id = 1;
+    string name = 2;
+    uint32 price_IDR = 3;
+    string description = 4;
+    string photo_URL = 5;
+}
+
+service OrderService {
+    rpc RegisterOrder (RegisterOrderRequest) returns (MessageResponse);
+    rpc GetOrders (GetOrdersRequest) returns (GetOrdersResponse);
+
+    rpc RegisterBusiness(RegisterBusinessRequest) returns (MessageResponse);
+    rpc GetBusinessList(GenericFilterParams) returns (GetBusinessListResponse);
+    rpc GetBusinessDetail(GetBusinessDetailRequest) returns (GetBusinessDetailResponse);
+}
+
+
+
+
+// ===== ORDER SERVICE - END =====

@@ -1,0 +1,136 @@
+server:
+  name: "ares"
+  http:
+    address: ":10004"
+  debug: 0
+  url: "http://localhost:10004"
+
+toggle:
+  enable_something: true
+
+environment:
+  is_local: true
+  is_debug: true
+  einhorn_fds: 3
+
+roles:
+  developer: 
+    id: 1
+    name: "Developer"
+  admin: 
+    id: 2
+    name: "Admin"
+  customer:
+    id: 3
+    name: "Customer"
+  pic:
+    id: 4
+    name: "PIC"
+  owner:
+    id: 5
+    name: "Owner"
+  user:
+    id: 6
+    name: "User"
+  public:
+    id: 999999
+    name: "Public"
+
+route_roles:
+  "":
+    roles:
+      - id: 1
+        name: "Developer"
+      - id: 2
+        name: "Admin"
+      - id: 3
+        name: "Customer"
+      - id: 4
+        name: "PIC"
+      - id: 5
+        name: "Owner"
+      - id: 6
+        name: "User"
+
+  "PUT /v1/user/assign/{role}":
+    roles:
+      - id: 1
+        name: "Developer"
+      - id: 2
+        name: "Admin"
+      - id: 3
+        name: "Customer"
+      - id: 4
+        name: "PIC"
+      - id: 5
+        name: "Owner"
+      - id: 6
+        name: "User"
+
+  "POST /v1/orders":
+    roles:
+      - id: 1
+        name: "Developer"
+      - id: 2
+        name: "Admin"
+      - id: 3
+        name: "Customer"
+      - id: 4
+        name: "PIC"
+      - id: 5
+        name: "Owner"
+
+  "GET /v1/orders":
+    roles:
+      - id: 1
+        name: "Developer"
+      - id: 2
+        name: "Admin"
+      - id: 3
+        name: "Customer"
+      - id: 4
+        name: "PIC"
+      - id: 5
+        name: "Owner"
+
+  "POST /v1/shops/register":
+    roles:
+      - id: 1
+        name: "Developer"
+      - id: 2
+        name: "Admin"
+      - id: 5
+        name: "Owner"
+  
+  "/ares.UserService/Login":
+    roles:
+      - id: 999
+        name: "Public"
+
+  "/ares.UserService/Register":
+    roles:
+      - id: 999
+        name: "Public"
+
+  "/ares.OrderService/RegisterBusiness":
+    roles:
+      - id: 2
+        name: "CUSTOMER"
+  
+  "/ares.OrderService/GetBusinessList":
+    roles:
+      - id: 2
+        name: "CUSTOMER"
+  
+  "/ares.OrderService/GetBusinessDetail":
+    roles:
+      - id: 2
+        name: "CUSTOMER"
+      - id: 3
+        name: "OWNER"
+  
+  "/ares.OrderService/RegisterOrder":
+    roles:
+      - id: 2
+        name: "CUSTOMER"
+      
