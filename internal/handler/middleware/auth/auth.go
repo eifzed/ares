@@ -114,11 +114,3 @@ func isPublicRoute(roles []user.UserRole) bool {
 	}
 	return false
 }
-
-// func GetBearerToken(token string) (string, error) {
-// 	data := strings.Split(token, "Bearer ")
-// 	if len(data) != 2 {
-// 		return "", jwt.ErrInvalid
-// 	}
-// 	return data[1], nil
-// }

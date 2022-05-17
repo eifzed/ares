@@ -25,6 +25,9 @@ func (uc *orderUC) RegisterBusiness(ctx context.Context, params order.BusinessDe
 		return commonerr.ErrorAlreadyExist("user already has registered business")
 	}
 
+	ctx, err = uc.TX.Start(ctx)
+	defer uc.TX.Finish(ctx, &err)
+
 	err = uc.OrderDB.InsertBulkProducts(ctx, params.Products)
 	if err != nil {
 		return err

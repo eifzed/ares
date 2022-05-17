@@ -4,16 +4,32 @@ import (
 	"context"
 
 	"github.com/eifzed/ares/internal/model/order"
+	tx "github.com/eifzed/ares/lib/database/mongodb/transaction"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func (db *orderDB) InsertBusiness(ctx context.Context, businessData *order.BusinessData) error {
-	result, err := db.DB.Collection("business").InsertOne(ctx, businessData)
+	session := tx.GetSessionFromContext(ctx)
+	err := mongo.WithSession(ctx, session, func(sc mongo.SessionContext) error {
+		var collection *mongo.Collection
+		if session != nil {
+			collection = tx.GetCollectionFromSession(session, "business")
+		} else {
+			collection = db.DB.Collection("business")
+		}
+		result, err := collection.InsertOne(sc, businessData)
+		if err != nil {
+			return err
+		}
+		businessData.ID = result.InsertedID.(primitive.ObjectID)
+		return nil
+	})
 	if err != nil {
 		return err
 	}
-	businessData.ID = result.InsertedID.(primitive.ObjectID)
+
 	return nil
 }
 

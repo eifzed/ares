@@ -16,6 +16,7 @@ import (
 	userDB "github.com/eifzed/ares/internal/repo/user"
 	orderUC "github.com/eifzed/ares/internal/usecase/order"
 	userUC "github.com/eifzed/ares/internal/usecase/user"
+	"github.com/eifzed/ares/lib/database/mongodb/transaction"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -72,10 +73,16 @@ func main() {
 		DB: aresDB,
 	})
 
+	tx := transaction.GetNewMongoDBTransaction(&transaction.Options{
+		Client: client,
+		DBName: "ares-db",
+	})
+
 	orderUC := orderUC.GetNewOrderUC(&orderUC.Options{
 		OrderDB: orderDB,
 		UserDB:  userDB,
 		Config:  cfg,
+		TX:      tx,
 	})
 	userUC := userUC.GetNewUserUC(&userUC.Options{
 		UserDB: userDB,
