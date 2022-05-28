@@ -19,5 +19,6 @@ func IsDevelopment() bool {
 }
 
 const (
-	TimeYYYMMDD_Dash = "2006-01-02"
+	TimeYYYMMDD_Dash       = "2006-01-02"
+	TimeYYYMMDDHHMMSS_Dash = "2006-01-02 15:04:05"
 )

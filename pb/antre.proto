@@ -1,8 +1,7 @@
 syntax = "proto3";
 
-package ares;
+package antre;
 import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
 
 
 option go_package = "github.com/eifzed/ares/pb";
@@ -76,7 +75,7 @@ message Order {
     string customer_note = 5;
     string shop_note = 6;
     uint32 rating = 7;
-    google.protobuf.Timestamp order_time = 8;
+    string order_time = 8;
 }
 
 message GetOrdersResponse {

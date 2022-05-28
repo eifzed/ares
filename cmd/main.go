@@ -87,6 +87,7 @@ func main() {
 	userUC := userUC.GetNewUserUC(&userUC.Options{
 		UserDB: userDB,
 		Config: cfg,
+		TX:     tx,
 	})
 
 	orderHandler := orderHandler.GetNewOrderHandler(&orderHandler.Option{

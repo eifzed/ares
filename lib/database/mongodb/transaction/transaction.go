@@ -53,7 +53,10 @@ func setSessionToContext(session mongo.Session, ctx context.Context) context.Con
 }
 
 func GetSessionFromContext(ctx context.Context) mongo.Session {
-	session := ctx.Value(txKey).(mongo.Session)
+	session, ok := ctx.Value(txKey).(mongo.Session)
+	if !ok {
+		return nil
+	}
 	return session
 }
 

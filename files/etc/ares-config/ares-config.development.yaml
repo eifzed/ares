@@ -102,34 +102,34 @@ route_roles:
       - id: 5
         name: "Owner"
   
-  "/ares.UserService/Login":
+  "/antre.UserService/Login":
     roles:
       - id: 999
         name: "Public"
 
-  "/ares.UserService/Register":
+  "/antre.UserService/Register":
     roles:
       - id: 999
         name: "Public"
 
-  "/ares.OrderService/RegisterBusiness":
+  "/antre.OrderService/RegisterBusiness":
     roles:
       - id: 2
         name: "CUSTOMER"
   
-  "/ares.OrderService/GetBusinessList":
+  "/antre.OrderService/GetBusinessList":
     roles:
       - id: 2
         name: "CUSTOMER"
   
-  "/ares.OrderService/GetBusinessDetail":
+  "/antre.OrderService/GetBusinessDetail":
     roles:
       - id: 2
         name: "CUSTOMER"
       - id: 3
         name: "OWNER"
   
-  "/ares.OrderService/RegisterOrder":
+  "/antre.OrderService/RegisterOrder":
     roles:
       - id: 2
         name: "CUSTOMER"

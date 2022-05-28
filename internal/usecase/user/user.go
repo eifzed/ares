@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"errors"
+	"strconv"
 	"time"
 
 	"github.com/eifzed/ares/internal/constant"
@@ -25,6 +26,8 @@ func (uc *userUC) Register(ctx context.Context, userData *user.User) (*user.Toke
 	if err != nil {
 		return nil, err
 	}
+	ctx, err = uc.TX.Start(ctx)
+	defer uc.TX.Finish(ctx, &err)
 
 	userData.Roles = []user.UserRole{{ID: constant.RoleCustomerID, Name: constant.RoleCustomer}}
 	err = uc.UserDB.InsertUser(ctx, userData)
@@ -37,7 +40,7 @@ func (uc *userUC) Register(ctx context.Context, userData *user.User) (*user.Toke
 	if err != nil {
 		return nil, err
 	}
-	return &user.Token{JWT: token, ValidUntil: now.Add(time.Minute * constant.MinutesInOneDay).String()}, nil
+	return &user.Token{JWT: token, ValidUntil: strconv.FormatInt(now.Add(time.Minute*constant.MinutesInOneDay).Unix(), 10)}, nil
 }
 func (uc *userUC) Login(ctx context.Context, email string, passwrod string) (*user.Token, error) {
 	userData, err := uc.UserDB.GetUserByEmail(ctx, email)
@@ -53,7 +56,7 @@ func (uc *userUC) Login(ctx context.Context, email string, passwrod string) (*us
 		return nil, err
 	}
 
-	return &user.Token{JWT: token, ValidUntil: now.Add(time.Minute * constant.MinutesInOneDay).String()}, nil
+	return &user.Token{JWT: token, ValidUntil: strconv.FormatInt(now.Add(time.Minute*constant.MinutesInOneDay).Unix(), 10)}, nil
 }
 
 func (uc *userUC) Logout(ctx context.Context, user *user.User) error {

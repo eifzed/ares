@@ -48,7 +48,7 @@ db.createCollection('business', {
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['owner_id', 'name', 'address', 'phone_number', 'description', 'product_ids'],
+      required: ['owner_id', 'name', 'category', 'address', 'phone_number', 'description', 'product_ids'],
       properties: {
         owner_id: {
           bsonType: 'objectId',
@@ -79,6 +79,10 @@ db.createCollection('business', {
           items:  {
             bsonType: 'objectId'
           }
+        },
+        category: {
+          bsonType: 'string',
+          enum:['Food & Beverages', 'Fashion', 'Health & Personal Care', 'Automotive', 'Electronics', 'Sports & Hobbies', 'Home & Living']
         }
       }
     }
@@ -141,3 +145,5 @@ db.business.aggregate([
   {$match: {_id: ObjectId("627e7792e5dfc249b676c802")}},
   {$lookup:{from: 'products', localField:'product_ids', foreignField:'_id', as:'products'}}
 ])
+
+categories = ['Food & Beverages', 'Fashion', 'Health & Personal Care', 'Automotive', 'Electronics', 'Sports & Hobbies', 'Home & Living']

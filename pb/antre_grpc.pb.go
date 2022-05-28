@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.19.4
-// source: ares.proto
+// source: antre.proto
 
 package pb
 
@@ -38,7 +38,7 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 
 func (c *userServiceClient) Logout(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*MessageResponse, error) {
 	out := new(MessageResponse)
-	err := c.cc.Invoke(ctx, "/ares.UserService/Logout", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.UserService/Logout", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *userServiceClient) Logout(ctx context.Context, in *emptypb.Empty, opts 
 
 func (c *userServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/ares.UserService/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.UserService/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *userServiceClient) Login(ctx context.Context, in *LoginRequest, opts ..
 
 func (c *userServiceClient) Register(ctx context.Context, in *UserRegistrationRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/ares.UserService/Register", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.UserService/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ func _UserService_Logout_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.UserService/Logout",
+		FullMethod: "/antre.UserService/Logout",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).Logout(ctx, req.(*emptypb.Empty))
@@ -127,7 +127,7 @@ func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.UserService/Login",
+		FullMethod: "/antre.UserService/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).Login(ctx, req.(*LoginRequest))
@@ -145,7 +145,7 @@ func _UserService_Register_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.UserService/Register",
+		FullMethod: "/antre.UserService/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).Register(ctx, req.(*UserRegistrationRequest))
@@ -157,7 +157,7 @@ func _UserService_Register_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ares.UserService",
+	ServiceName: "antre.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -174,7 +174,7 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "ares.proto",
+	Metadata: "antre.proto",
 }
 
 // OrderServiceClient is the client API for OrderService service.
@@ -198,7 +198,7 @@ func NewOrderServiceClient(cc grpc.ClientConnInterface) OrderServiceClient {
 
 func (c *orderServiceClient) RegisterOrder(ctx context.Context, in *RegisterOrderRequest, opts ...grpc.CallOption) (*MessageResponse, error) {
 	out := new(MessageResponse)
-	err := c.cc.Invoke(ctx, "/ares.OrderService/RegisterOrder", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.OrderService/RegisterOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ func (c *orderServiceClient) RegisterOrder(ctx context.Context, in *RegisterOrde
 
 func (c *orderServiceClient) GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error) {
 	out := new(GetOrdersResponse)
-	err := c.cc.Invoke(ctx, "/ares.OrderService/GetOrders", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.OrderService/GetOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -216,7 +216,7 @@ func (c *orderServiceClient) GetOrders(ctx context.Context, in *GetOrdersRequest
 
 func (c *orderServiceClient) RegisterBusiness(ctx context.Context, in *RegisterBusinessRequest, opts ...grpc.CallOption) (*MessageResponse, error) {
 	out := new(MessageResponse)
-	err := c.cc.Invoke(ctx, "/ares.OrderService/RegisterBusiness", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.OrderService/RegisterBusiness", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -225,7 +225,7 @@ func (c *orderServiceClient) RegisterBusiness(ctx context.Context, in *RegisterB
 
 func (c *orderServiceClient) GetBusinessList(ctx context.Context, in *GenericFilterParams, opts ...grpc.CallOption) (*GetBusinessListResponse, error) {
 	out := new(GetBusinessListResponse)
-	err := c.cc.Invoke(ctx, "/ares.OrderService/GetBusinessList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.OrderService/GetBusinessList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +234,7 @@ func (c *orderServiceClient) GetBusinessList(ctx context.Context, in *GenericFil
 
 func (c *orderServiceClient) GetBusinessDetail(ctx context.Context, in *GetBusinessDetailRequest, opts ...grpc.CallOption) (*GetBusinessDetailResponse, error) {
 	out := new(GetBusinessDetailResponse)
-	err := c.cc.Invoke(ctx, "/ares.OrderService/GetBusinessDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/antre.OrderService/GetBusinessDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -295,7 +295,7 @@ func _OrderService_RegisterOrder_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.OrderService/RegisterOrder",
+		FullMethod: "/antre.OrderService/RegisterOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).RegisterOrder(ctx, req.(*RegisterOrderRequest))
@@ -313,7 +313,7 @@ func _OrderService_GetOrders_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.OrderService/GetOrders",
+		FullMethod: "/antre.OrderService/GetOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).GetOrders(ctx, req.(*GetOrdersRequest))
@@ -331,7 +331,7 @@ func _OrderService_RegisterBusiness_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.OrderService/RegisterBusiness",
+		FullMethod: "/antre.OrderService/RegisterBusiness",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).RegisterBusiness(ctx, req.(*RegisterBusinessRequest))
@@ -349,7 +349,7 @@ func _OrderService_GetBusinessList_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.OrderService/GetBusinessList",
+		FullMethod: "/antre.OrderService/GetBusinessList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).GetBusinessList(ctx, req.(*GenericFilterParams))
@@ -367,7 +367,7 @@ func _OrderService_GetBusinessDetail_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ares.OrderService/GetBusinessDetail",
+		FullMethod: "/antre.OrderService/GetBusinessDetail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).GetBusinessDetail(ctx, req.(*GetBusinessDetailRequest))
@@ -379,7 +379,7 @@ func _OrderService_GetBusinessDetail_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ares.OrderService",
+	ServiceName: "antre.OrderService",
 	HandlerType: (*OrderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -404,5 +404,5 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "ares.proto",
+	Metadata: "antre.proto",
 }
